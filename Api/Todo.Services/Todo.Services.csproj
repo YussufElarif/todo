@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Api.Mappers\Todo.Api.Mappers.csproj" />
+    <ProjectReference Include="..\Todo.Api.Models\Todo.Api.Models.csproj" />
+    <ProjectReference Include="..\Todo.DataStore\Todo.DataStore.csproj" />
+  </ItemGroup>
+
+</Project>
