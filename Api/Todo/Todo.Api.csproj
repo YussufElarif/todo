@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\HttpResponseExtensions.cs" />
+    <Compile Remove="Infrastructure\UnhandledExceptionFilter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 using AutoMapper;
 
 using Todo.DataAccess;
-using Todo.Api.Infrastructure;
 using Todo.Services.Infrastructure;
 using Todo.DataStore.Infrastructure;
 using Todo.Api.Mappers.Infrastructure;
@@ -36,7 +35,7 @@ namespace Todo.Api
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
-            services.AddMvc(config => config.Filters.Add(typeof(UnhandledExceptionFilter)))
+            services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IMapper>(provider =>
@@ -61,6 +60,12 @@ namespace Todo.Api
             {
                 app.UseHsts();
             }
+
+            app.UseCors(cors => cors
+                .AllowCredentials()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin());
 
             app.UseHttpsRedirection();
             app.UseMvc();

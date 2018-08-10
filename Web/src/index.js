@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-import { TodoListComponent as View } from './todo';
+
+import { TodoList } from './todo';
 
 import registerServiceWorker from './registerServiceWorker';
+import indexStore from './index.store';
 
 ReactDOM.render(
-    <View />,
+    <Provider store={indexStore}>
+        <TodoList />
+    </Provider>,
     document.getElementById('root')
 );
 
