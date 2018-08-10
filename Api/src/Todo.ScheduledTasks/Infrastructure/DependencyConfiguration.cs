@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Todo.ScheduledTasks.Tasks;
 
 namespace Todo.ScheduledTasks.Infrastructure

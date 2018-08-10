@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Todo.DataAccess;
 using Todo.Entities;
 
@@ -12,12 +11,6 @@ namespace Todo.DataStore
         public TodoStore(TodoContext context)
         {
             _context = context;
-
-            if (_context.TodoItems.Count() == 0)
-            {
-                _context.TodoItems.Add(new TodoItem { Value = "Todo Item 1" });
-                _context.SaveChanges();
-            }
         }
 
         public IEnumerable<TodoItem> GetTodoList ()
