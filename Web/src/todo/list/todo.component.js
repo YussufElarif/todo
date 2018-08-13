@@ -93,7 +93,8 @@ export class TodoComponent extends Component {
                        onChange={this.handleChange} />
 
                  <a className="btn update waves-effect orange accent-2"
-                    onClick={this.handleUpdate}> Update </a> 
+                    title="Temporary update button"
+                    onClick={this.handleUpdate}><i className="material-icons">refresh</i> </a> 
 
                 <a className="btn delete waves-effect red accent-2"
                     onClick={this.handleDelete}><i className="material-icons">delete</i></a>

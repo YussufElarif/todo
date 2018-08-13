@@ -6,8 +6,17 @@
     position: relative;
 }
 
+.todolist ul li div input {
+    padding-right: 115px !important;
+    box-sizing: border-box !important;
+}
+
 .todolist ul li div a.delete {
     position: absolute;
-    right: -10px;
-    top: 10px;
+    right: 55px;
+}
+
+.todolist ul li div a.update {
+    position: absolute;
+    right: 0px;
 }
