@@ -11,6 +11,7 @@ using Todo.Services.Infrastructure;
 using Todo.DataStore.Infrastructure;
 using Todo.Api.Mappers.Infrastructure;
 using Todo.ScheduledTasks.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Todo.Api
 {
@@ -37,7 +38,8 @@ namespace Todo.Api
                 return new Mapper(config);
             });
 
-            services.AddServices()
+            services.AddLogging()
+                    .AddServices()
                     .AddDataStore()
                     .AddScheduledTasks();
         }

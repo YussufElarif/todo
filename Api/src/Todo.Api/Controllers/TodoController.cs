@@ -14,9 +14,9 @@ namespace Todo.Api.Controllers
     public class TodoController : ControllerBase
     {
         private readonly ITodoService _todoService;
-        private readonly ILogger _logger;
+        private readonly ILogger<TodoController> _logger;
 
-        public TodoController(ITodoService todoService, ILogger logger)
+        public TodoController(ITodoService todoService, ILogger<TodoController> logger)
         {
             _todoService = todoService ?? throw new ArgumentNullException(nameof(todoService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

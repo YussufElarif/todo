@@ -1,0 +1,13 @@
+.todolist ul li {
+    /* background: maroon; */
+}
+
+.todolist ul li div {
+    position: relative;
+}
+
+.todolist ul li div a.delete {
+    position: absolute;
+    right: -10px;
+    top: 10px;
+}
