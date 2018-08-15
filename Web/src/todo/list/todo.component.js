@@ -73,13 +73,18 @@ export class TodoComponent extends Component {
 
         if (!id) {
             return (
-                <div className="todo-view">
-                    <input type="text"
-                        value={value}
-                        onChange={this.handleChange} />
+                <div className="row">
+                    <div className="input-field col s12">
+                        <input id="todo_add"
+                               type="text"
+                               value={value}
+                               onChange={this.handleChange} />
+                            
+                        <label for="todo_add">Todo item</label>
+                    </div>
 
-                    <button className="todo-view-add"
-                        onClick={this.handleAdd}> Add </button>
+                    <a className="btn add waves-effect green accent-4"
+                       onClick={this.handleAdd}><i className="material-icons">add</i></a>
                 </div>
             );
         }
@@ -94,7 +99,7 @@ export class TodoComponent extends Component {
 
                  <a className="btn update waves-effect orange accent-2"
                     title="Temporary update button"
-                    onClick={this.handleUpdate}><i className="material-icons">refresh</i> </a> 
+                    onClick={this.handleUpdate}><i className="material-icons">refresh</i></a> 
 
                 <a className="btn delete waves-effect red accent-2"
                     onClick={this.handleDelete}><i className="material-icons">delete</i></a>

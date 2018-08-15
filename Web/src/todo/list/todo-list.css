@@ -18,5 +18,30 @@
 
 .todolist ul li div a.update {
     position: absolute;
-    right: 0px;
+    right: 0;
+}
+
+.todolist > div {
+    position: relative;
+}
+
+.todolist > div .input-field {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.todolist > div .input-field.col label {
+    left: 0;
+}
+
+.todolist > div .input-field input {
+    width: 100%; 
+    padding-right: 65px !important;
+    box-sizing: border-box !important;
+}
+
+.todolist > div a.add {
+    position: absolute;
+    right: 0;
+    bottom: 28px;
 }
