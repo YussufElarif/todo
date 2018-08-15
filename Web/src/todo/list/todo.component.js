@@ -80,7 +80,7 @@ export class TodoComponent extends Component {
                                value={value}
                                onChange={this.handleChange} />
                             
-                        <label for="todo_add">Todo item</label>
+                        <label htmlFor="todo_add">Todo item</label>
                     </div>
 
                     <a className="btn add waves-effect green accent-4"
