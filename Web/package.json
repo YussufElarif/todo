@@ -8,6 +8,7 @@
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-inline-editing": "^1.0.10",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",

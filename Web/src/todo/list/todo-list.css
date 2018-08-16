@@ -2,23 +2,23 @@
     /* background: maroon; */
 }
 
-.todolist ul li div {
+.todolist ul li > div {
     position: relative;
 }
 
-.todolist ul li div input {
-    padding-right: 115px !important;
+.todolist ul li > div input {
+    padding-right: 65px !important;
     box-sizing: border-box !important;
 }
 
-.todolist ul li div a.delete {
-    position: absolute;
-    right: 55px;
+.todolist ul li > div label {
+    height: 45px;
 }
 
-.todolist ul li div a.update {
+.todolist ul li > div a.delete {
     position: absolute;
     right: 0;
+    top: 0;
 }
 
 .todolist > div {

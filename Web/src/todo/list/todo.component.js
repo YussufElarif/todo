@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InlineEdit from 'react-inline-editing';
 
 export class TodoComponent extends Component {
     constructor() {
@@ -21,8 +22,7 @@ export class TodoComponent extends Component {
         this.setState({ ...todo });
     }
 
-    handleChange = (event) => {
-        const value = event.target.value;
+    handleChange = (value) => {
         this.setState({ value });
     }
 
@@ -37,30 +37,42 @@ export class TodoComponent extends Component {
         this.setState({ value: '' });
     }
 
-    handleUpdate = () => {
+    handleUpdate = (text) => {
         const { todo, onUpdate } = this.props;
-        const { id, value, isComplete } = this.state;        
 
         if (!onUpdate) {
             return;
         }
 
-        let todoItem = {};
+        const compareAndUpdate = () => {
+            const { id, value, isComplete } = this.state;
 
-        if (todo.value !== value) {
-            todoItem.value = value;
+            let todoItem = {};
+
+            if (todo.value === value && todo.isComplete === isComplete) {
+                return;       
+            }
+
+            if (todo.value !== value) {
+                todoItem.value = value;
+            }
+
+            if (todo.isComplete !== isComplete) {
+                todoItem.isComplete = isComplete;
+            }
+
+            onUpdate(id, todoItem);
         }
 
-        if (todo.isComplete !== isComplete) {
-            todoItem.isComplete = isComplete;
-        }
+        this.setState({ value: text }, () => {
+            compareAndUpdate(text);
 
-        onUpdate(id, todoItem);
+        });
     }
 
     handleDelete = () => {
         const { onDelete } = this.props;
-        
+
         if (!onDelete) {
             return;
         }
@@ -76,15 +88,15 @@ export class TodoComponent extends Component {
                 <div className="row">
                     <div className="input-field col s12">
                         <input id="todo_add"
-                               type="text"
-                               value={value}
-                               onChange={this.handleChange} />
-                            
+                            type="text"
+                            value={value}
+                            onChange={this.handleChange} />
+
                         <label htmlFor="todo_add">Todo item</label>
                     </div>
 
                     <a className="btn add waves-effect green accent-4"
-                       onClick={this.handleAdd}><i className="material-icons">add</i></a>
+                        onClick={this.handleAdd}><i className="material-icons">add</i></a>
                 </div>
             );
         }
@@ -92,14 +104,8 @@ export class TodoComponent extends Component {
 
         return (
             <div className="row">
-                <input className="col s12" 
-                       type="text"
-                       value={value}
-                       onChange={this.handleChange} />
-
-                 <a className="btn update waves-effect orange accent-2"
-                    title="Temporary update button"
-                    onClick={this.handleUpdate}><i className="material-icons">refresh</i></a> 
+                <InlineEdit text={value}
+                    onFocusOut={this.handleUpdate} />
 
                 <a className="btn delete waves-effect red accent-2"
                     onClick={this.handleDelete}><i className="material-icons">delete</i></a>
