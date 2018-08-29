@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { TodoComponent } from './todo.component';
+import { TodoDetailComponent } from '../detail';
 
 import './todo-list.css';
 
-export class TodoListView extends Component {
+export class TodoListComponent extends Component {
 
     componentWillMount = () => {
         this.props.getTodoList();
@@ -35,20 +35,20 @@ export class TodoListView extends Component {
         const { todoList } = this.props;
 
         return (
-            <div className="todolist">
+            <div className="todo-list">
                 <ul>
                     {
                         todoList.map(todo => (
                             <li key={todo.id}>
-                                <TodoComponent todo={todo}
-                                               onUpdate={this.handleUpdateTodo}
-                                               onDelete={this.handleDeleteTodo} />
+                                <TodoDetailComponent todo={todo}
+                                                     onUpdate={this.handleUpdateTodo}
+                                                     onDelete={this.handleDeleteTodo} />
                             </li>
                         ))
                     }
                 </ul>
 
-                <TodoComponent onAdd={this.handleAddTodo} />
+                <TodoDetailComponent onAdd={this.handleAddTodo} />
             </div>
         )
     }

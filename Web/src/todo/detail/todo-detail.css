@@ -1,0 +1,55 @@
+.todo-detail {
+    position: relative;
+}
+
+.todo-detail input {
+    padding-right: 65px !important;
+    box-sizing: border-box !important;
+}
+
+.todo-detail a {
+    position: absolute;
+    right: 0;
+}
+
+
+/* 
+ * UPDATE 
+ */
+
+.todo-detail.update {
+    height: 36px;
+}
+
+.todo-detail.update label {
+    display: block;
+    position: relative;
+    top: 10px;
+    font-size: 16px;
+}
+
+.todo-detail.update a.delete {
+    top: 0;
+}
+
+
+/*
+ * ADD
+ */
+
+.todo-detail.add .input-field {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.todo-detail.add .input-field label {
+    left: 0;
+}
+
+.todo-detail.add .input-field input {
+    width: 100%;
+}
+
+.todo-detail.add a.add {
+    bottom: 28px;
+}

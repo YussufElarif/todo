@@ -1,4 +1,4 @@
-import { TodoListView } from './todo-list.view';
+import { TodoListComponent } from './todo-list.component';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     deleteTodo
 }, dispatch);
 
-export const TodoList = connect(mapStateToProps, mapDispatchToProps)(TodoListView);
+export const TodoList = connect(mapStateToProps, mapDispatchToProps)(TodoListComponent);

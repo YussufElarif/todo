@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import InlineEdit from 'react-inline-editing';
 
-export class TodoComponent extends Component {
+import './todo-detail.css';
+
+export class TodoDetailComponent extends Component {
     constructor() {
         super();
 
@@ -9,10 +11,10 @@ export class TodoComponent extends Component {
             id: null,
             value: '',
             isComplete: false
-        }
+        };
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         const { todo } = this.props;
 
         if (!todo) {
@@ -22,8 +24,8 @@ export class TodoComponent extends Component {
         this.setState({ ...todo });
     }
 
-    handleChange = (value) => {
-        this.setState({ value });
+    handleChange = (event) => {
+        this.setState({ value: event.target.value });
     }
 
     handleAdd = () => {
@@ -50,7 +52,7 @@ export class TodoComponent extends Component {
             let todoItem = {};
 
             if (todo.value === value && todo.isComplete === isComplete) {
-                return;       
+                return;
             }
 
             if (todo.value !== value) {
@@ -80,17 +82,26 @@ export class TodoComponent extends Component {
         onDelete(this.state.id);
     }
 
+    _handleKeyPress = (event, callback) => {
+        if (event.key !== 'Enter') {
+            return;
+        }
+
+        callback();
+    }
+
     render = () => {
         const { id, value, isComplete } = this.state;
 
         if (!id) {
             return (
-                <div className="row">
+                <div className="todo-detail add row">
                     <div className="input-field col s12">
                         <input id="todo_add"
                             type="text"
                             value={value}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange}
+                            onKeyPress={((e) => this._handleKeyPress(e, this.handleAdd))} />
 
                         <label htmlFor="todo_add">Todo item</label>
                     </div>
@@ -103,7 +114,7 @@ export class TodoComponent extends Component {
 
 
         return (
-            <div className="row">
+            <div className="todo-detail update row">
                 <InlineEdit text={value}
                     onFocusOut={this.handleUpdate} />
 
