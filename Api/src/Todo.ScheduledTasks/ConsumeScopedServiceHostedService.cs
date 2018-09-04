@@ -25,7 +25,7 @@ namespace Todo.ScheduledTasks
         {
             _logger.LogInformation("Timed background service is starting");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
 
             return Task.CompletedTask;
         }

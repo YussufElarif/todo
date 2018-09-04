@@ -1,3 +1,5 @@
+const api = 'http://localhost:50867/api';
+
 const setHeaders = () => {
     const headers = {
         'Content-Type': 'application/json',
@@ -34,7 +36,7 @@ const promiseMethod = (res) => {
 }
 
 export const get = (path, params) => {
-    let url = 'https://localhost:44328/api' + path;
+    let url = api + path;
 
     if (params) {
         url += constructUrl(params);
@@ -45,19 +47,19 @@ export const get = (path, params) => {
 }
 
 export const post = (path, body) => {
-    let url = 'https://localhost:44328/api' + path;
+    let url = api + path;
     return fetch(url, { method: 'POST', body: JSON.stringify(body), headers: setHeaders() })
         .then(promiseMethod);
 }
 
 export const put = (path, body) => {
-    let url = 'https://localhost:44328/api' + path;
+    let url = api + path;
     return fetch(url, { method: 'PUT', body: JSON.stringify(body), headers: setHeaders() })
         .then(promiseMethod);
 }
 
 export const del = (path) => {
-    let url = 'https://localhost:44328/api' + path;
+    let url = api + path;
     return fetch(url, { method: 'DELETE', headers: setHeaders() })
         .then(promiseMethod);
 }

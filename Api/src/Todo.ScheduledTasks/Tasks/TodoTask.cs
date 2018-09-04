@@ -17,7 +17,7 @@ namespace Todo.ScheduledTasks.Tasks
         {
             var todoItem = new CreateTodo()
             {
-                Value = $"V{versionNumber}. This is a scheduled task that posts every 30 seconds."
+                Value = $"V{versionNumber}. This is a scheduled task that posts every 5 minutes."
             };
 
             _todoService.CreateTodoItem(todoItem);

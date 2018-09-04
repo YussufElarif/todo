@@ -21,7 +21,7 @@
     height: 36px;
 }
 
-.todo-detail.update label {
+.todo-detail.update span {
     display: block;
     position: relative;
     top: 10px;

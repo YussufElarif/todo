@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InlineEdit from 'react-inline-editing';
+import { RIEInput } from 'riek';
 
 import './todo-detail.css';
 
@@ -115,8 +115,9 @@ export class TodoDetailComponent extends Component {
 
         return (
             <div className="todo-detail update row">
-                <InlineEdit text={value}
-                    onFocusOut={this.handleUpdate} />
+                <RIEInput value={value}
+                          propName='value'
+                          change={((e) => this.handleUpdate(e.value))} />
 
                 <a className="btn delete waves-effect red accent-2"
                     onClick={this.handleDelete}><i className="material-icons">delete</i></a>

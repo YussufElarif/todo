@@ -26,15 +26,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5E582AB5-907
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FBE72992-2A7D-4FE2-9364-AB4CF4FB2531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api.Test", "test\Todo.Api.Test\Todo.Api.Test.csproj", "{76111E35-A2A4-4326-BCA9-FA5798CC0435}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Api.Test", "test\Todo.Api.Test\Todo.Api.Test.csproj", "{76111E35-A2A4-4326-BCA9-FA5798CC0435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Services.Test", "test\Todo.Services.Test\Todo.Services.Test.csproj", "{81D6F2C2-EC4F-4ED1-9033-8BBBCC3ED81F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Services.Test", "test\Todo.Services.Test\Todo.Services.Test.csproj", "{81D6F2C2-EC4F-4ED1-9033-8BBBCC3ED81F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api.Mappers.Test", "test\Todo.Api.Mappers.Test\Todo.Api.Mappers.Test.csproj", "{27350259-7425-4207-BB05-0077A8C6E861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Api.Mappers.Test", "test\Todo.Api.Mappers.Test\Todo.Api.Mappers.Test.csproj", "{27350259-7425-4207-BB05-0077A8C6E861}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.DataStore.Test", "Test\Todo.DataStore.Test\Todo.DataStore.Test.csproj", "{4326690A-EDC2-4C69-91EE-C60F6C8E0319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.DataStore.Test", "Test\Todo.DataStore.Test\Todo.DataStore.Test.csproj", "{4326690A-EDC2-4C69-91EE-C60F6C8E0319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.ScheduledTasks.Test", "test\Todo.ScheduledTasks.Test\Todo.ScheduledTasks.Test.csproj", "{5F4EDFE8-E6FE-4BCE-8D34-A5BE0D585B3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.ScheduledTasks.Test", "test\Todo.ScheduledTasks.Test\Todo.ScheduledTasks.Test.csproj", "{5F4EDFE8-E6FE-4BCE-8D34-A5BE0D585B3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

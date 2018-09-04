@@ -3,16 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "material-design-icons": "^3.0.1",
-    "material-icons": "^0.2.3",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-inline-editing": "^1.0.10",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "riek": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
