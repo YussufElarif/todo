@@ -32,6 +32,11 @@
     top: 0;
 }
 
+.todo-detail.update a.check {
+    top: 0;
+    right: 55px;
+}
+
 
 /*
  * ADD

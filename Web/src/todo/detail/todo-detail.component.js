@@ -39,14 +39,15 @@ export class TodoDetailComponent extends Component {
         this.setState({ value: '' });
     }
 
-    handleUpdate = (text) => {
-        const { todo, onUpdate } = this.props;
+    handleUpdate = (item) => {
+        const { onUpdate } = this.props;
 
         if (!onUpdate) {
             return;
         }
 
         const compareAndUpdate = () => {
+            const { todo } = this.props;
             const { id, value, isComplete } = this.state;
 
             let todoItem = {};
@@ -66,10 +67,7 @@ export class TodoDetailComponent extends Component {
             onUpdate(id, todoItem);
         }
 
-        this.setState({ value: text }, () => {
-            compareAndUpdate(text);
-
-        });
+        this.setState({ ...item }, () => compareAndUpdate());
     }
 
     handleDelete = () => {
@@ -117,8 +115,10 @@ export class TodoDetailComponent extends Component {
             <div className="todo-detail update row">
                 <RIEInput value={value}
                           propName='value'
-                          change={((e) => this.handleUpdate(e.value))} />
+                          change={this.handleUpdate} />
 
+                <a className="btn check waves-effect light-blue lighten-1"
+                   onClick={(() => this.handleUpdate({ isComplete: !isComplete }))}><i className="material-icons">{ isComplete ? 'check_box' : 'check_box_outline_blank' }</i></a>
                 <a className="btn delete waves-effect red accent-2"
                     onClick={this.handleDelete}><i className="material-icons">delete</i></a>
             </div>
