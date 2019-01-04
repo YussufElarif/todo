@@ -1,4 +1,4 @@
-import { 
+import {
     GET_TODO_LIST,
     ADD_TODO,
     UPDATE_TODO,
@@ -15,23 +15,23 @@ export const initialState = {
 };
 
 export const todoReducer = (state = initialState, action = {}) => {
-    switch(action.type) {
+    switch (action.type) {
         case GET_TODO_LIST.PENDING:
             return {
-              ...state,
-              isGetTodoListPending: true  
+                ...state,
+                isGetTodoListPending: true
             };
         case GET_TODO_LIST.SUCCESS:
             return {
-              ...state,
-              todoList: action.payload,
-              isGetTodoListPending: false  
+                ...state,
+                todoList: action.payload,
+                isGetTodoListPending: false
             };
         case GET_TODO_LIST.ERROR:
             return {
                 ...state,
                 getListError: action.payload,
-                isGetTodoListPending: false 
+                isGetTodoListPending: false
             };
         case ADD_TODO.PENDING:
             return {
