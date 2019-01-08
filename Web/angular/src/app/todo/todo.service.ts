@@ -13,14 +13,14 @@ export class TodoService
         private _http: HttpClient
     ) { }
 
-    public getTodos(): Observable<any>
+    public getTodos(params: any): Observable<any>
     {
-        return this._http.get(this.base);
+        return this._http.get(this.base, { params });
     }
 
-    public addTodo(): Observable<any>
+    public addTodo(todo: any): Observable<any>
     {
-        return this._http.post(this.base, {});
+        return this._http.post(this.base, todo);
     }
 
     public updateTodo(id: string, todo: any): Observable<any>

@@ -10,7 +10,7 @@ export enum DelTodoActionsEnum
 export class DelTodoPending implements Action
 {
     public readonly type = DelTodoActionsEnum.Pending;
-    
+
     constructor(
         public payload: any
     ) { }
@@ -19,6 +19,10 @@ export class DelTodoPending implements Action
 export class DelTodoSuccess implements Action
 {
     public readonly type = DelTodoActionsEnum.Success;
+
+    constructor(
+        public payload: any
+    ) { }
 }
 
 export class DelTodoError implements Action

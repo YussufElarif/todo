@@ -23,11 +23,11 @@ namespace Todo.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GetTodo>> GetList()
+        public ActionResult<IEnumerable<GetTodo>> GetList([FromQuery] PaginationParameters paginationParameters)
         {
             try
             {
-                return Ok(_todoService.GetTodoList());
+                return Ok(_todoService.GetTodoList(paginationParameters));
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Todo.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request?.Path, Request.QueryString);
+                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request.Path, Request.QueryString);
                 return StatusCode((int)HttpStatusCode.InternalServerError, "Unexpected error occured");
             }
         }
@@ -60,12 +60,12 @@ namespace Todo.Api.Controllers
         {
             try
             {
-                _todoService.CreateTodoItem(todoItem);
-                return Created(Request?.Path.Value, null);
+                var todo = _todoService.CreateTodoItem(todoItem);
+                return Created(Request.Path.Value, todo);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request?.Path, Request.QueryString);
+                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request.Path, Request.QueryString);
                 return StatusCode((int)HttpStatusCode.InternalServerError, "Unexpected error occured");
             }
         }
@@ -84,7 +84,7 @@ namespace Todo.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request?.Path, Request.QueryString);
+                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request.Path, Request.QueryString);
                 return StatusCode((int)HttpStatusCode.InternalServerError, "Unexpected error occured");
             }
         }
@@ -103,7 +103,7 @@ namespace Todo.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request?.Path, Request.QueryString);
+                _logger.LogError(ex, "Unhandled exception occurred (HTTP 500): {0} {2}{3}", Request.Method, Request.Path, Request.QueryString);
                 return StatusCode((int)HttpStatusCode.InternalServerError, "Unexpected error occured");
             }
         }

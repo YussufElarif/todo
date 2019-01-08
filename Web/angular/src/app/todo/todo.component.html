@@ -1,15 +1,48 @@
-<ng-container *ngTemplateOutlet="todo; context: { todo: (todo$ | async) }"></ng-container>
+<form #todoFilter="ngForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input
+            matInput
+            name="search"
+            placeholder="Placeholder"
+            [(ngModel)]="search"
+        >
+    </mat-form-field>
 
-<ng-template
-    #todo
-    let-todos="todo"
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="filter(todoFilter)"
+    >Search</button>
+</form>
+
+<form #todoForm="ngForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Fill form field</mat-label>
+        <input
+            matInput
+            name="value"
+            placeholder="Placeholder"
+            [(ngModel)]="value"
+        >
+    </mat-form-field>
+
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="addTodo(todoForm)"
+    >Save</button>
+</form>
+
+<div
+    sharedAutoScroll
+    [limit]="limit"
+    [total]="todos.todoListTotal"
+    [loading]="todos.filterTodoPending"
+    (pageChange)="paginate($event)"
 >
-    <div *ngIf="todos.getTodoPending">
-        Loading
-    </div>
-
     <div *ngFor="let todo of todos.todoList">
-        {{ todo.id }}
+        {{ todo.value }}
         <button
             mat-mini-fab
             color="warn"
@@ -18,21 +51,8 @@
             <mat-icon>delete</mat-icon>
         </button>
     </div>
+</div>
 
-    <div>
-        <mat-form-field appearance="fill">
-            <mat-label>Fill form field</mat-label>
-            <input
-                matInput
-                placeholder="Placeholder"
-            >
-        </mat-form-field>
+<div *ngIf="todos.getTodoPending">Loading</div>
 
-        <button
-            mat-flat-button
-            color="primary"
-        >Save</button>
-    </div>
-
-    <div *ngIf="todos.error">{{ todo.error }}</div>
-</ng-template>
+<div *ngIf="todos.error">{{ todos.error }}</div>

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Todo.Api.Models\Todo.Api.Models.csproj" />
     <ProjectReference Include="..\Todo.DataAccess\Todo.DataAccess.csproj" />
   </ItemGroup>
 

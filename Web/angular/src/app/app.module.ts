@@ -6,10 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './core/http.interceptor';
 
 import { TodoModule } from './todo';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 

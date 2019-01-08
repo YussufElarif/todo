@@ -1,3 +1,4 @@
+import { FilterTodoActions, FilterTodoActionsEnum } from './filter-todo.action';
 import { GetTodoActions, GetTodoActionsEnum } from './get-todo.actions';
 import { AddTodoActions, AddTodoActionsEnum } from './add-todo.action';
 import { DelTodoActions, DelTodoActionsEnum } from './del-todo.action';
@@ -9,22 +10,28 @@ interface ITodoState
 
     todoList: any[];
 
+    todoListTotal: number;
+
     getTodoPending: boolean;
 
     addTodoPending: boolean;
 
     delTodoPending: boolean;
+
+    filterTodoPending: boolean;
 }
 
 const initialState: ITodoState = {
     error: null,
     todoList: [],
+    todoListTotal: 0,
     getTodoPending: false,
     addTodoPending: false,
-    delTodoPending: false
+    delTodoPending: false,
+    filterTodoPending: false,
 };
 
-export const todoReducers = (state = initialState, action: GetTodoActions | AddTodoActions | DelTodoActions): ITodoState =>
+export const todoReducers = (state = initialState, action: GetTodoActions | AddTodoActions | DelTodoActions | FilterTodoActions): ITodoState =>
 {
     switch (action.type) {
         case GetTodoActionsEnum.Pending:
@@ -37,7 +44,8 @@ export const todoReducers = (state = initialState, action: GetTodoActions | AddT
         case GetTodoActionsEnum.Success:
             return {
                 ...state,
-                todoList: action.payload,
+                todoList: [...state.todoList, ...action.payload.items],
+                todoListTotal: action.payload.total,
                 getTodoPending: false
             };
 
@@ -46,6 +54,29 @@ export const todoReducers = (state = initialState, action: GetTodoActions | AddT
                 ...state,
                 error: action.payload,
                 getTodoPending: false
+            };
+
+        // TODO: Can i use the same Pending parameter for different actions?
+        case FilterTodoActionsEnum.Pending:
+            return {
+                ...state,
+                error: null,
+                filterTodoPending: true
+            };
+
+        case FilterTodoActionsEnum.Success:
+            return {
+                ...state,
+                todoList: action.payload.items,
+                todoListTotal: action.payload.total,
+                filterTodoPending: false
+            };
+
+        case FilterTodoActionsEnum.Error:
+            return {
+                ...state,
+                error: action.payload,
+                filterTodoPending: false
             };
 
         case AddTodoActionsEnum.Pending:
@@ -58,7 +89,7 @@ export const todoReducers = (state = initialState, action: GetTodoActions | AddT
         case AddTodoActionsEnum.Success:
             return {
                 ...state,
-                // todoList: state.todoList, //State management, make the api return the created result
+                todoList: [...state.todoList, action.payload],
                 addTodoPending: false
             };
 
@@ -79,7 +110,7 @@ export const todoReducers = (state = initialState, action: GetTodoActions | AddT
         case DelTodoActionsEnum.Success:
             return {
                 ...state,
-                // todoList: state.todoList, //State management, remove the todo based on the id sent in the payload? ??
+                todoList: [...state.todoList.filter(todo => todo.id != action.payload)],
                 delTodoPending: false
             };
 

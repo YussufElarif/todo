@@ -10,6 +10,10 @@ export enum GetTodoActionsEnum
 export class GetTodoPending implements Action
 {
     public readonly type = GetTodoActionsEnum.Pending;
+
+    constructor(
+        public payload: any
+    ) { }
 }
 
 export class GetTodoSuccess implements Action

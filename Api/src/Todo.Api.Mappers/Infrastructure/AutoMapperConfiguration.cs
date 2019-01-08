@@ -7,6 +7,7 @@ namespace Todo.Api.Mappers.Infrastructure
         public static IMapperConfigurationExpression AddApiProfiles(this IMapperConfigurationExpression config)
         {
             config.AddProfile<CreateTodoToTodoItemProfile>();
+            config.AddProfile<IEnumerableTodoItemToPaginationGetTodo>();
 
             return config;
         }

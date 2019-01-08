@@ -5,11 +5,11 @@ namespace Todo.Services
 {
     public interface ITodoService
     {
-        IEnumerable<GetTodo> GetTodoList();
+        Pagination<GetTodo> GetTodoList(PaginationParameters paginationParameters);
 
         GetTodo GetTodoById(long id);
 
-        void CreateTodoItem(CreateTodo createTodoItem);
+        GetTodo CreateTodoItem(CreateTodo createTodoItem);
 
         void UpdateTodoItem(long id, UpdateTodo updateTodoItem);
 

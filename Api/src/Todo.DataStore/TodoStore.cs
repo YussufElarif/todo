@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Todo.Api.Models;
 using Todo.DataAccess;
 using Todo.Entities;
 
@@ -13,9 +17,35 @@ namespace Todo.DataStore
             _context = context;
         }
 
-        public IEnumerable<TodoItem> GetTodoList ()
+        public int GetTodoTotal(PaginationParameters paginationParameters)
         {
-            return _context.TodoItems;
+            var list = _context.TodoItems.ToList();
+
+            if (!string.IsNullOrEmpty(paginationParameters.Search))
+            {
+                list = list
+                    .Where(todo =>
+                        todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
+                    .ToList();
+            }
+
+            return list.Count();
+        }
+
+        public IEnumerable<TodoItem> GetTodoList (PaginationParameters paginationParameters)
+        {
+            var list = _context.TodoItems.ToList();
+
+            if (!string.IsNullOrEmpty(paginationParameters.Search))
+            {
+                list = list
+                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
+                    .ToList();
+            }
+
+            return list
+                .Skip(paginationParameters.Offset)
+                .Take(paginationParameters.Limit);
         }
 
         public TodoItem GetTodoById (long id)

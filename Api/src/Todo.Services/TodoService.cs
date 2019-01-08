@@ -11,17 +11,23 @@ namespace Todo.Services
     public class TodoService : ITodoService
     {
         private readonly ITodoStore _todoStore;
+
         private readonly IMapper _mapper;
+
         public TodoService(ITodoStore todoStore, IMapper mapper)
         {
             _todoStore = todoStore ?? throw new ArgumentNullException(nameof(todoStore));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public IEnumerable<GetTodo> GetTodoList()
+        public Pagination<GetTodo> GetTodoList(PaginationParameters paginationParameters)
         {
-            var todoList = _todoStore.GetTodoList();
-            return _mapper.Map<IEnumerable<GetTodo>>(todoList);
+            var todoList = _todoStore.GetTodoList(paginationParameters);
+
+            var mapper = _mapper.Map<Pagination<GetTodo>>(todoList);
+            mapper.Total = _todoStore.GetTodoTotal(paginationParameters);
+
+            return mapper;
         }
 
         public GetTodo GetTodoById (long id)
@@ -36,10 +42,13 @@ namespace Todo.Services
             return _mapper.Map<GetTodo>(todoItem);
         }
 
-        public void CreateTodoItem(CreateTodo createTodoItem)
+        public GetTodo CreateTodoItem(CreateTodo createTodoItem)
         {
             var mappedTodoItem = _mapper.Map<TodoItem>(createTodoItem);
+
             _todoStore.CreateTodoItem(mappedTodoItem);
+
+            return _mapper.Map<GetTodo>(mappedTodoItem);
         }
 
         public void UpdateTodoItem(long id, UpdateTodo updateTodoItem)
