@@ -1,11 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { GetTodoPending } from './state/get-todo.actions';
-import { AddTodoPending } from './state/add-todo.action';
-import { DelTodoPending } from './state/del-todo.action';
 import { Subscription } from 'rxjs';
-import { FilterTodoPending } from './state/filter-todo.action';
+
+import { AddTodo, GetTodo, DeleteTodo, FilterTodo } from './state';
 
 @Component({
     selector: 'todo',
@@ -45,21 +42,21 @@ export class TodoComponent implements OnInit, OnDestroy
 
     public filter(filters: any): void
     {
-        this._store.dispatch(new FilterTodoPending({ ...filters.value, limit: this.limit, offset: 0 }));
+        this._store.dispatch(new FilterTodo.Pending({ ...filters.value, limit: this.limit, offset: 0 }));
     }
 
     public getTodo(filters: any): void
     {
-        this._store.dispatch(new GetTodoPending(filters));
+        this._store.dispatch(new GetTodo.Pending(filters));
     }
 
     public addTodo(todo: any): void
     {
-        this._store.dispatch(new AddTodoPending(todo.value));
+        this._store.dispatch(new AddTodo.Pending(todo.value));
     }
 
     public deleteTodo(id: string): void
     {
-        this._store.dispatch(new DelTodoPending(id));
+        this._store.dispatch(new DeleteTodo.Pending(id));
     }
 }

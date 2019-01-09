@@ -53,6 +53,6 @@
     </div>
 </div>
 
-<div *ngIf="todos.getTodoPending">Loading</div>
+<div *ngIf="(todos.getTodoPending || todos.filterTodoPending)">Loading</div>
 
-<div *ngIf="todos.error">{{ todos.error }}</div>
+<div *ngIf="todos.error">{{ todos.error | json }}</div>

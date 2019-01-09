@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { environment } from '@env/environment';
+import { Filters } from './filters.helper';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,8 @@ export class HttpInterceptor implements AngularHttpInterceptor
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
         req = req.clone({
-            url: environment.api + req.url
+            url: environment.api + req.url,
+            params: Filters.remove().params(req)
         });
 
         return next.handle(req).pipe(

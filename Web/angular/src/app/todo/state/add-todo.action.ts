@@ -1,37 +1,40 @@
 import { Action } from '@ngrx/store';
 
-export enum AddTodoActionsEnum
+export namespace AddTodo
 {
-    Pending = '[AddTodo] Pending',
-    Success = '[AddTodo] Success',
-    Error = '[AddTodo] Error'
+    export enum Enum
+    {
+        Pending = '[AddTodo] Pending',
+        Success = '[AddTodo] Success',
+        Error = '[AddTodo] Error'
+    }
+    
+    export class Pending implements Action
+    {
+        public readonly type = Enum.Pending;
+    
+        constructor(
+            public payload: any
+        ) { }
+    }
+    
+    export class Success implements Action
+    {
+        public readonly type = Enum.Success;
+    
+        constructor(
+            public payload: any
+        ) { }
+    }
+    
+    export class Error implements Action
+    {
+        public readonly type = Enum.Error;
+    
+        constructor(
+            public payload: any
+        ) { }
+    }
+    
+    export type Types = Pending | Success | Error;
 }
-
-export class AddTodoPending implements Action
-{
-    public readonly type = AddTodoActionsEnum.Pending;
-
-    constructor(
-        public payload: any
-    ) { }
-}
-
-export class AddTodoSuccess implements Action
-{
-    public readonly type = AddTodoActionsEnum.Success;
-
-    constructor(
-        public payload: any
-    ) { }
-}
-
-export class AddTodoError implements Action
-{
-    public readonly type = AddTodoActionsEnum.Error;
-
-    constructor(
-        public payload: any
-    ) { }
-}
-
-export type AddTodoActions = AddTodoPending | AddTodoSuccess | AddTodoError;
