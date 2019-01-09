@@ -56,7 +56,6 @@ export const todoReducers = (state = initialState, action: GetTodoActions | AddT
                 getTodoPending: false
             };
 
-        // TODO: Can i use the same Pending parameter for different actions?
         case FilterTodoActionsEnum.Pending:
             return {
                 ...state,
