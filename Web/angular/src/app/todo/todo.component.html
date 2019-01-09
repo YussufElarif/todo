@@ -38,7 +38,7 @@
     sharedAutoScroll
     [limit]="limit"
     [total]="todos.todoListTotal"
-    [loading]="todos.filterTodoPending"
+    [filter]="todos.filterTodoPending"
     (pageChange)="paginate($event)"
 >
     <div *ngFor="let todo of todos.todoList">

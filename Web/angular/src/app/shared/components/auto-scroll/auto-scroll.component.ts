@@ -14,10 +14,9 @@ export class SharedAutoScrollComponent implements OnInit
     public limit: number;
 
     @Input()
-    public set loading(val: boolean)
+    public set filter(val: boolean)
     {
         this.offset = 0;
-        this.disable = true;
     };
 
     @Output()
@@ -26,8 +25,6 @@ export class SharedAutoScrollComponent implements OnInit
     public offset: number = 0;
 
     public page: number = 0;
-
-    public disable: boolean;
 
     constructor() { }
 

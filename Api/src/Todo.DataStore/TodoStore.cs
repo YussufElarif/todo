@@ -24,8 +24,7 @@ namespace Todo.DataStore
             if (!string.IsNullOrEmpty(paginationParameters.Search))
             {
                 list = list
-                    .Where(todo =>
-                        todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
                     .ToList();
             }
 
