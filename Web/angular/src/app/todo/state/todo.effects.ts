@@ -4,8 +4,9 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { AddTodo } from './add-todo.action';
-import { GetTodo } from './get-todo.actions';
-import { DeleteTodo } from './del-todo.action';
+import { GetTodo } from './get-todo.action';
+import { UpdateTodo } from './update-todo.action';
+import { DeleteTodo } from './delete-todo.action';
 import { FilterTodo } from './filter-todo.action';
 
 import { TodoService } from '../todo.service';
@@ -42,6 +43,17 @@ export class TodoEffects
             .pipe(
                 map((res: any) => new AddTodo.Success(res)),
                 catchError((err: any) => of(new AddTodo.Error(err)))
+            )
+        )
+    );
+
+    @Effect()
+    public updateTodo$ = this._actions$.pipe(
+        ofType(UpdateTodo.Enum.Pending),
+        switchMap((action: UpdateTodo.Pending) => this._todoService.updateTodo(action.payload.id, action.payload.todo)
+            .pipe(
+                map((res: any) => new UpdateTodo.Success(action.payload)),
+                catchError((err: any) => of(new UpdateTodo.Error(err)))
             )
         )
     );

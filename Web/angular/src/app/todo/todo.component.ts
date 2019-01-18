@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { AddTodo, GetTodo, DeleteTodo, FilterTodo } from './state';
+import { AddTodo, GetTodo, UpdateTodo, DeleteTodo, FilterTodo } from './state';
 
 @Component({
     selector: 'todo',
@@ -53,6 +53,11 @@ export class TodoComponent implements OnInit, OnDestroy
     public addTodo(todo: any): void
     {
         this._store.dispatch(new AddTodo.Pending(todo.value));
+    }
+
+    public updateTodo(id: string, todo: any): void
+    {
+        this._store.dispatch(new UpdateTodo.Pending({ id, todo }));
     }
 
     public deleteTodo(id: string): void

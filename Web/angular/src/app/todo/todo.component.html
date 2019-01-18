@@ -42,7 +42,11 @@
     (pageChange)="paginate($event)"
 >
     <div *ngFor="let todo of todos.todoList">
-        {{ todo.value }}
+        <form>
+            <!-- TODO: -->
+            <!-- <mat-checkbox [(ngModel)]=""></mat-checkbox> -->
+            {{ todo.value }}
+        </form>
         <button
             mat-mini-fab
             color="warn"

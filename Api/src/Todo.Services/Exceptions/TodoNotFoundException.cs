@@ -4,15 +4,7 @@ namespace Todo.Services.Exceptions
 {
     public class TodoNotFoundException : Exception
     {
-        public TodoNotFoundException()
-        {
-        }
-
-        public TodoNotFoundException(string message) : base(message)
-        {
-        }
-
-        public TodoNotFoundException(string message, Exception inner) : base(message, inner)
+        public TodoNotFoundException(): base("Todo item does not exist")
         {
         }
     }

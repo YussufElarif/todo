@@ -36,7 +36,7 @@ namespace Todo.Services
 
             if (todoItem == null)
             {
-                throw new TodoNotFoundException("Todo item does not exist");
+                throw new TodoNotFoundException();
             }
 
             return _mapper.Map<GetTodo>(todoItem);
@@ -57,7 +57,7 @@ namespace Todo.Services
 
             if (todoItem == null)
             {
-                throw new TodoNotFoundException("Todo item does not exist");
+                throw new TodoNotFoundException();
             }
 
             if (updateTodoItem.Value != null)
@@ -79,7 +79,7 @@ namespace Todo.Services
 
             if (todoItem == null)
             {
-                throw new TodoNotFoundException("Todo item does not exist");
+                throw new TodoNotFoundException();
             }
 
             _todoStore.DeleteTodoItem(todoItem);

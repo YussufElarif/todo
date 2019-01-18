@@ -1,7 +1,8 @@
 import { AddTodo } from './add-todo.action';
-import { GetTodo } from './get-todo.actions';
-import { DeleteTodo } from './del-todo.action';
+import { GetTodo } from './get-todo.action';
+import { DeleteTodo } from './delete-todo.action';
 import { FilterTodo } from './filter-todo.action';
+import { UpdateTodo } from './update-todo.action';
 
 // TODO: Find a place to put this
 interface ITodoState
@@ -16,7 +17,9 @@ interface ITodoState
 
     addTodoPending: boolean;
 
-    delTodoPending: boolean;
+    updateTodoPending: boolean;
+
+    deleteTodoPending: boolean;
 
     filterTodoPending: boolean;
 }
@@ -27,11 +30,12 @@ const initialState: ITodoState = {
     todoListTotal: 0,
     getTodoPending: false,
     addTodoPending: false,
-    delTodoPending: false,
+    updateTodoPending: false,
+    deleteTodoPending: false,
     filterTodoPending: false,
 };
 
-export const todoReducers = (state = initialState, action: GetTodo.Types | AddTodo.Types | DeleteTodo.Types | FilterTodo.Types): ITodoState =>
+export const todoReducers = (state = initialState, action: GetTodo.Types | AddTodo.Types | UpdateTodo.Types | DeleteTodo.Types | FilterTodo.Types): ITodoState =>
 {
     switch (action.type) {
         case GetTodo.Enum.Pending:
@@ -99,25 +103,46 @@ export const todoReducers = (state = initialState, action: GetTodo.Types | AddTo
                 addTodoPending: false
             };
 
+        case UpdateTodo.Enum.Pending:
+            return {
+                ...state,
+                error: null,
+                updateTodoPending: true
+            };
+
+        case UpdateTodo.Enum.Success:
+            return {
+                ...state,
+                todoList: [...state.todoList.map(todo => (todo.id === action.payload.id) ? { ...todo, ...action.payload.todo } : todo )],
+                updateTodoPending: false
+            };
+        
+        case UpdateTodo.Enum.Error:
+            return {
+                ...state,
+                error: action.payload,
+                updateTodoPending: false
+            };
+
         case DeleteTodo.Enum.Pending:
             return {
                 ...state,
                 error: null,
-                delTodoPending: true
+                deleteTodoPending: true
             };
 
         case DeleteTodo.Enum.Success:
             return {
                 ...state,
                 todoList: [...state.todoList.filter(todo => todo.id != action.payload)],
-                delTodoPending: false
+                deleteTodoPending: false
             };
 
         case DeleteTodo.Enum.Error:
             return {
                 ...state,
                 error: action.payload,
-                delTodoPending: false
+                deleteTodoPending: false
             };
 
         default:
