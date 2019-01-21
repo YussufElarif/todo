@@ -45,8 +45,18 @@
         <form>
             <!-- TODO: -->
             <!-- <mat-checkbox [(ngModel)]=""></mat-checkbox> -->
-            {{ todo.value }}
+            <mat-form-field [appearance]="todo.enabled ? 'fill' : ''">
+                <input
+                    matInput
+                    name="value"
+                    [ngModel]="todo.value"
+                    (ngModelChange)="updateTodo(todo.id, { value: $event })"
+                    (click)="!todo.enabled ? todo.enabled = true : null"
+                    [readonly]="!todo.enabled"
+                >
+            </mat-form-field>
         </form>
+
         <button
             mat-mini-fab
             color="warn"

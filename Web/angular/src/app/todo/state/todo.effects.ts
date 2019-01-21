@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError } from 'rxjs/operators';
+
 import { of } from 'rxjs';
+import { switchMap, map, catchError, mergeMap, concatMap } from 'rxjs/operators';
 
 import { AddTodo } from './add-todo.action';
 import { GetTodo } from './get-todo.action';
@@ -39,7 +40,7 @@ export class TodoEffects
     @Effect()
     public addTodo$ = this._actions$.pipe(
         ofType(AddTodo.Enum.Pending),
-        switchMap((action: AddTodo.Pending) => this._todoService.addTodo(action.payload)
+        concatMap((action: AddTodo.Pending) => this._todoService.addTodo(action.payload)
             .pipe(
                 map((res: any) => new AddTodo.Success(res)),
                 catchError((err: any) => of(new AddTodo.Error(err)))
@@ -50,7 +51,7 @@ export class TodoEffects
     @Effect()
     public updateTodo$ = this._actions$.pipe(
         ofType(UpdateTodo.Enum.Pending),
-        switchMap((action: UpdateTodo.Pending) => this._todoService.updateTodo(action.payload.id, action.payload.todo)
+        mergeMap((action: UpdateTodo.Pending) => this._todoService.updateTodo(action.payload.id, action.payload.todo)
             .pipe(
                 map((res: any) => new UpdateTodo.Success(action.payload)),
                 catchError((err: any) => of(new UpdateTodo.Error(err)))
@@ -61,7 +62,7 @@ export class TodoEffects
     @Effect()
     public delTodo$ = this._actions$.pipe(
         ofType(DeleteTodo.Enum.Pending),
-        switchMap((action: DeleteTodo.Pending) => this._todoService.deleteTodo(action.payload)
+        mergeMap((action: DeleteTodo.Pending) => this._todoService.deleteTodo(action.payload)
             .pipe(
                 map((res: any) => new DeleteTodo.Success(action.payload)),
                 catchError((err: any) => of(new DeleteTodo.Error(err)))
