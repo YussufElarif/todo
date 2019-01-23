@@ -1,0 +1,17 @@
+<form #todoFilter="ngForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input
+            matInput
+            name="search"
+            placeholder="Placeholder"
+            [(ngModel)]="search"
+        >
+    </mat-form-field>
+
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="filter(todoFilter)"
+    >Search</button>
+</form>

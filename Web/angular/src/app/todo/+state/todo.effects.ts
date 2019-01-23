@@ -4,12 +4,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { switchMap, map, catchError, mergeMap, concatMap } from 'rxjs/operators';
 
-import { AddTodo } from './add-todo.action';
-import { GetTodo } from './get-todo.action';
-import { UpdateTodo } from './update-todo.action';
-import { DeleteTodo } from './delete-todo.action';
-
 import { TodoService } from '../todo.service';
+import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.action';
 
 @Injectable()
 export class TodoEffects

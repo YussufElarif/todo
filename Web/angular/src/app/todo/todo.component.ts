@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Subscription } from 'rxjs';
 
-import { AddTodo, GetTodo } from './state';
-import { TodoState, TodoQueryParams } from './models';
-import { map } from 'rxjs/operators';
 import { PaginationQuery } from '@todo/shared/models';
+
+import { AddTodo, GetTodo } from './+state';
+import { TodoState, TodoQueryParams } from './models';
 
 @Component({
     selector: 'todo',
@@ -17,15 +16,12 @@ import { PaginationQuery } from '@todo/shared/models';
 })
 export class TodoComponent implements OnInit, OnDestroy
 {
-    public limit: number = 25;
-
     public todos: TodoState;
 
     private _todoSub: Subscription;
 
     constructor(
         private _store: Store<any>,
-        private _router: Router,
         private _activatedRoute: ActivatedRoute
     ) { }
 
@@ -37,18 +33,13 @@ export class TodoComponent implements OnInit, OnDestroy
 
         this._activatedRoute.queryParams.subscribe((params: TodoQueryParams) =>
         {
-            this.getTodo({ offset: 0, limit: this.limit, ...params });
+            this.getTodo({ offset: 0, limit: this.todos.limit, ...params });
         });
     }
 
     public ngOnDestroy(): void
     {
         this._todoSub.unsubscribe();
-    }
-
-    public filter(form: NgForm): void
-    {
-        this._router.navigate([], { queryParams: { ...form.value } });
     }
 
     public paginate(filters?: PaginationQuery): void
@@ -58,7 +49,6 @@ export class TodoComponent implements OnInit, OnDestroy
 
     public getTodo(filters: TodoQueryParams): void
     {
-        console.log(filters);
         this._store.dispatch(new GetTodo.Pending(filters));
     }
 

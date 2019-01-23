@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PaginationQuery } from '@todo/shared/models';
 
 @Component({
@@ -6,7 +6,7 @@ import { PaginationQuery } from '@todo/shared/models';
     templateUrl: './auto-scroll.component.html',
     styleUrls: ['./auto-scroll.component.scss']
 })
-export class SharedAutoScrollComponent implements OnInit
+export class SharedAutoScrollComponent
 {
     @Input()
     public total: number;
@@ -20,14 +20,7 @@ export class SharedAutoScrollComponent implements OnInit
     @Output()
     public pageChange: EventEmitter<PaginationQuery> = new EventEmitter<PaginationQuery>();
 
-    public page: number = 0;
-
     constructor() { }
-
-    public ngOnInit(): void
-    {
-        this.page = Math.ceil(this.total / this.limit);
-    }
 
     public paginate(): void
     {

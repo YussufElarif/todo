@@ -13,10 +13,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModules } from '@todo/shared';
 
-import { TodoEffects } from './state/todo.effects';
-import { todoReducers } from './state/todo.reducers';
+import { TodoEffects, todoReducers } from './+state';
 
 import { TodoComponent } from './todo.component';
+import { TodoFilterComponent } from './todo-filter';
 import { TodoDetailComponent } from './todo-detail';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { TodoDetailComponent } from './todo-detail';
     ],
     declarations: [
         TodoComponent,
+        TodoFilterComponent,
         TodoDetailComponent
     ]
 })

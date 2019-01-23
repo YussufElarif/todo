@@ -6,6 +6,8 @@ interface State
 
     offset: number;
 
+    limit: number;
+
     todoList: Todo[];
 
     todoListTotal: number;

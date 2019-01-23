@@ -1,13 +1,11 @@
-import { AddTodo } from './add-todo.action';
-import { GetTodo } from './get-todo.action';
-import { DeleteTodo } from './delete-todo.action';
-import { UpdateTodo } from './update-todo.action';
-
 import { TodoState } from '../models';
+
+import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.action';
 
 const initialState: TodoState = {
     error: null,
     offset: 0,
+    limit: 25,
     todoList: [],
     todoListTotal: 0,
     getTodoPending: false,
@@ -52,7 +50,8 @@ export const todoReducers = (state = initialState, action: GetTodo.Types | AddTo
         case AddTodo.Enum.Success:
             return {
                 ...state,
-                todoList: [...state.todoList, action.payload],
+                todoList: [action.payload, ...state.todoList],
+                todoListTotal: state.todoListTotal + 1,
                 addTodoPending: false
             };
 
@@ -95,6 +94,7 @@ export const todoReducers = (state = initialState, action: GetTodo.Types | AddTo
             return {
                 ...state,
                 todoList: [...state.todoList.filter(todo => todo.id != action.payload)],
+                todoListTotal: state.todoListTotal - 1,
                 deleteTodoPending: false
             };
 

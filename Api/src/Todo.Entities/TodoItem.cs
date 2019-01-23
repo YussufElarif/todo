@@ -1,4 +1,6 @@
-﻿namespace Todo.Entities
+﻿using System;
+
+namespace Todo.Entities
 {
     public class TodoItem
     {
@@ -7,5 +9,7 @@
         public string Value { get; set; }
 
         public bool IsComplete { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { UpdateTodo, DeleteTodo } from '../state';
+import { UpdateTodo, DeleteTodo } from '../+state';
 
 @Component({
     selector: 'todo-detail',

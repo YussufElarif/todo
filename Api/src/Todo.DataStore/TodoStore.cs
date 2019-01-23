@@ -19,13 +19,12 @@ namespace Todo.DataStore
 
         public int GetTodoTotal(PaginationParameters paginationParameters)
         {
-            var list = _context.TodoItems.ToList();
+            IQueryable<TodoItem> list = _context.TodoItems;
 
             if (!string.IsNullOrEmpty(paginationParameters.Search))
             {
                 list = list
-                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
-                    .ToList();
+                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase));
             }
 
             return list.Count();
@@ -33,16 +32,16 @@ namespace Todo.DataStore
 
         public IEnumerable<TodoItem> GetTodoList (PaginationParameters paginationParameters)
         {
-            var list = _context.TodoItems.ToList();
+            IQueryable<TodoItem> list = _context.TodoItems;
 
             if (!string.IsNullOrEmpty(paginationParameters.Search))
             {
                 list = list
-                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase))
-                    .ToList();
+                    .Where(todo => todo.Value.Contains(paginationParameters.Search, StringComparison.CurrentCultureIgnoreCase));
             }
 
             return list
+                .OrderByDescending(todo => todo.Created)
                 .Skip(paginationParameters.Offset)
                 .Take(paginationParameters.Limit);
         }
