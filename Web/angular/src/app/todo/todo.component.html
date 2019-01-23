@@ -37,36 +37,16 @@
 <div
     sharedAutoScroll
     [limit]="limit"
+    [offset]="todos.offset"
     [total]="todos.todoListTotal"
-    [filter]="todos.filterTodoPending"
     (pageChange)="paginate($event)"
 >
-    <div *ngFor="let todo of todos.todoList">
-        <form>
-            <!-- TODO: -->
-            <!-- <mat-checkbox [(ngModel)]=""></mat-checkbox> -->
-            <mat-form-field [appearance]="todo.enabled ? 'fill' : ''">
-                <input
-                    matInput
-                    name="value"
-                    [ngModel]="todo.value"
-                    (ngModelChange)="updateTodo(todo.id, { value: $event })"
-                    (click)="!todo.enabled ? todo.enabled = true : null"
-                    [readonly]="!todo.enabled"
-                >
-            </mat-form-field>
-        </form>
-
-        <button
-            mat-mini-fab
-            color="warn"
-            (click)="deleteTodo(todo.id)"
-        >
-            <mat-icon>delete</mat-icon>
-        </button>
-    </div>
+    <todo-detail
+        *ngFor="let todo of todos.todoList"
+        [todo]="todo"
+    ></todo-detail>
 </div>
 
-<div *ngIf="(todos.getTodoPending || todos.filterTodoPending)">Loading</div>
+<div *ngIf="todos.getTodoPending">Loading</div>
 
 <div *ngIf="todos.error">{{ todos.error | json }}</div>

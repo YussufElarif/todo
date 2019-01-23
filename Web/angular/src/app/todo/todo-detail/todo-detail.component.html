@@ -1,0 +1,39 @@
+<form>
+    <mat-form-field appearance="">
+        <mat-checkbox
+            *ngIf="!edit"
+            matPrefix
+            name="isComplete"
+            [ngModel]="todo.isComplete"
+            (ngModelChange)="changeCheck(todo.id, $event)"
+        >
+        </mat-checkbox>
+
+        <input
+            #input
+            matInput
+            name="value"
+            [ngModel]="todo.value"
+            [disabled]="!edit"
+        >
+
+        <button
+            matSuffix
+            mat-button
+            color="primary"
+            (click)="changeValue(todo.id, input.value)"
+        >
+            <mat-icon>{{ edit ? 'check' : 'edit' }}</mat-icon>
+        </button>
+
+        <button
+            *ngIf="!edit"
+            matSuffix
+            mat-button
+            color="warn"
+            (click)="deleteTodo(todo.id)"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-form-field>
+</form>

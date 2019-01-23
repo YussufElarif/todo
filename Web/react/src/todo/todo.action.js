@@ -16,7 +16,8 @@ export const getTodoList = () => {
     return (dispatch) => {
         dispatch({ type: GET_TODO_LIST.PENDING });
 
-        get('/todo')
+        // TODO: Temporarily hard coded parameters
+        get('/todo', { limit: 25, offset: 0 })
             .then((res) => {
                 dispatch({ type: GET_TODO_LIST.SUCCESS, payload: res });
             })

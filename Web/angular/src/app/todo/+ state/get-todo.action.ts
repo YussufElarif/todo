@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store';
 
-export namespace DeleteTodo 
+import { Pagination } from '@todo/shared/models';
+import { TodoQueryParams, Todo } from '../models';
+
+export namespace GetTodo
 {
     export enum Enum
     {
-        Pending = '[DeleteTodo] Pending',
-        Success = '[DeleteTodo] Success',
-        Error = '[DeleteTodo] Error'
+        Pending = '[GetTodo] Pending',
+        Success = '[GetTodo] Success',
+        Error = '[GetTodo] Error'
     }
 
     export class Pending implements Action
@@ -14,7 +17,7 @@ export namespace DeleteTodo
         public readonly type = Enum.Pending;
 
         constructor(
-            public payload: any
+            public payload: TodoQueryParams
         ) { }
     }
 
@@ -23,7 +26,7 @@ export namespace DeleteTodo
         public readonly type = Enum.Success;
 
         constructor(
-            public payload: any
+            public payload: Pagination<Todo>
         ) { }
     }
 

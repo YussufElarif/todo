@@ -8,7 +8,6 @@ import { AddTodo } from './add-todo.action';
 import { GetTodo } from './get-todo.action';
 import { UpdateTodo } from './update-todo.action';
 import { DeleteTodo } from './delete-todo.action';
-import { FilterTodo } from './filter-todo.action';
 
 import { TodoService } from '../todo.service';
 
@@ -22,17 +21,6 @@ export class TodoEffects
             .pipe(
                 map((res: any) => new GetTodo.Success(res)),
                 catchError((err: any) => of(new GetTodo.Error(err)))
-            )
-        )
-    );
-
-    @Effect()
-    public filterTodo$ = this._actions$.pipe(
-        ofType(FilterTodo.Enum.Pending),
-        switchMap((action: FilterTodo.Pending) => this._todoService.getTodos(action.payload)
-            .pipe(
-                map((res: any) => new FilterTodo.Success(res)),
-                catchError((err: any) => of(new FilterTodo.Error(err)))
             )
         )
     );

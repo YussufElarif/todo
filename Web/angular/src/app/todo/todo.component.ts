@@ -1,9 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Subscription } from 'rxjs';
 
-import { AddTodo, GetTodo, UpdateTodo, DeleteTodo, FilterTodo } from './state';
+import { AddTodo, GetTodo } from './state';
+import { TodoState, TodoQueryParams } from './models';
+import { map } from 'rxjs/operators';
+import { PaginationQuery } from '@todo/shared/models';
 
 @Component({
     selector: 'todo',
@@ -14,12 +19,14 @@ export class TodoComponent implements OnInit, OnDestroy
 {
     public limit: number = 25;
 
-    public todos: any;
+    public todos: TodoState;
 
     private _todoSub: Subscription;
 
     constructor(
-        private _store: Store<any>
+        private _store: Store<any>,
+        private _router: Router,
+        private _activatedRoute: ActivatedRoute
     ) { }
 
     public ngOnInit(): void
@@ -28,7 +35,10 @@ export class TodoComponent implements OnInit, OnDestroy
             .select((state) => state.todoFeature)
             .subscribe(todo => this.todos = todo);
 
-        this.filter({});
+        this._activatedRoute.queryParams.subscribe((params: TodoQueryParams) =>
+        {
+            this.getTodo({ offset: 0, limit: this.limit, ...params });
+        });
     }
 
     public ngOnDestroy(): void
@@ -36,33 +46,24 @@ export class TodoComponent implements OnInit, OnDestroy
         this._todoSub.unsubscribe();
     }
 
-    public paginate(pagination: any): void
+    public filter(form: NgForm): void
     {
-        this.getTodo({ ...pagination, limit: this.limit });
+        this._router.navigate([], { queryParams: { ...form.value } });
     }
 
-    public filter(filters: any): void
+    public paginate(filters?: PaginationQuery): void
     {
-        this._store.dispatch(new FilterTodo.Pending({ ...filters.value, limit: this.limit, offset: 0 }));
+        this.getTodo({ ...this._activatedRoute.snapshot.queryParams, ...filters });
     }
 
-    public getTodo(filters: any): void
+    public getTodo(filters: TodoQueryParams): void
     {
+        console.log(filters);
         this._store.dispatch(new GetTodo.Pending(filters));
     }
 
     public addTodo(todo: any): void
     {
         this._store.dispatch(new AddTodo.Pending(todo.value));
-    }
-
-    public updateTodo(id: string, todo: any): void
-    {
-        this._store.dispatch(new UpdateTodo.Pending({ id, todo }));
-    }
-
-    public deleteTodo(id: string): void
-    {
-        this._store.dispatch(new DeleteTodo.Pending(id));
     }
 }

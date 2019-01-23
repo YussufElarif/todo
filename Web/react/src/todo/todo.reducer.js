@@ -8,6 +8,7 @@ import {
 export const initialState = {
     error: '',
     todoList: [],
+    todoListTotal: 0,
     isGetTodoListPending: false,
     isAddTodoPending: false,
     isUpdateTodoPending: false,
@@ -24,7 +25,8 @@ export const todoReducer = (state = initialState, action = {}) => {
         case GET_TODO_LIST.SUCCESS:
             return {
                 ...state,
-                todoList: action.payload,
+                todoList: action.payload.items,
+                todoListTotal: action.payload.total,
                 isGetTodoListPending: false
             };
         case GET_TODO_LIST.ERROR:

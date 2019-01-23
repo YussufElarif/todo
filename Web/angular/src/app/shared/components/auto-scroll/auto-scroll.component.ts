@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PaginationQuery } from '@todo/shared/models';
 
 @Component({
     selector: '[sharedAutoScroll]',
@@ -11,18 +12,13 @@ export class SharedAutoScrollComponent implements OnInit
     public total: number;
 
     @Input()
-    public limit: number;
+    public offset: number;
 
     @Input()
-    public set filter(val: boolean)
-    {
-        this.offset = 0;
-    };
+    public limit: number;
 
     @Output()
-    public pageChange: EventEmitter<any> = new EventEmitter<any>();
-
-    public offset: number = 0;
+    public pageChange: EventEmitter<PaginationQuery> = new EventEmitter<PaginationQuery>();
 
     public page: number = 0;
 
@@ -35,14 +31,12 @@ export class SharedAutoScrollComponent implements OnInit
 
     public paginate(): void
     {
-        console.log(this.offset, this.limit, this.total);
-
         this.offset = this.offset + this.limit;
 
         if (this.offset >= this.total) {
             return;
         }
 
-        this.pageChange.emit({ offset: this.offset });
+        this.pageChange.emit({ offset: this.offset, limit: this.limit });
     }
 }
