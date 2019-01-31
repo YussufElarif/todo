@@ -1,9 +1,10 @@
 <todo-filter></todo-filter>
 
-<form #todoForm="ngForm">
+<form>
     <mat-form-field appearance="fill">
         <mat-label>Fill form field</mat-label>
         <input
+            #input
             matInput
             name="value"
             placeholder="Placeholder"
@@ -14,23 +15,23 @@
     <button
         mat-flat-button
         color="primary"
-        (click)="addTodo(todoForm)"
+        (click)="addTodo(input)"
     >Save</button>
 </form>
 
 <div
     sharedAutoScroll
-    [limit]="todos.limit"
-    [offset]="todos.offset"
-    [total]="todos.todoListTotal"
+    [limit]="state.limit"
+    [offset]="state.offset"
+    [total]="state.todoListTotal"
     (pageChange)="paginate($event)"
 >
     <todo-detail
-        *ngFor="let todo of todos.todoList"
+        *ngFor="let todo of state.todoList"
         [todo]="todo"
     ></todo-detail>
 </div>
 
-<div *ngIf="todos.getTodoPending">Loading</div>
+<div *ngIf="state.getTodoPending">Loading</div>
 
-<div *ngIf="todos.error">{{ todos.error | json }}</div>
+<div *ngIf="state.error">{{ state.error | json }}</div>

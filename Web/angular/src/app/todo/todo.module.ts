@@ -14,17 +14,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedModules } from '@todo/shared';
 
 import { TodoEffects, todoReducers } from './+state';
-
-import { TodoComponent } from './todo.component';
-import { TodoFilterComponent } from './todo-filter';
 import { TodoDetailComponent } from './todo-detail';
+import { TodoFilterComponent } from './todo-filter';
+import { TodoComponent } from './todo.component';
 
 @NgModule({
     imports: [
         FormsModule,
         CommonModule,
         RouterModule,
-        StoreModule.forFeature('todoFeature', todoReducers),
+        StoreModule.forFeature('todos', todoReducers),
         EffectsModule.forFeature([TodoEffects]),
         MatCheckboxModule,
         MatButtonModule,

@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { switchMap, map, catchError, mergeMap, concatMap } from 'rxjs/operators';
 
 import { TodoService } from '../todo.service';
-import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.action';
+import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.actions';
 
 @Injectable()
 export class TodoEffects

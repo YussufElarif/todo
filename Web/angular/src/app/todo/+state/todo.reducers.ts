@@ -1,8 +1,8 @@
 import { TodoState } from '../models';
 
-import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.action';
+import { GetTodo, AddTodo, UpdateTodo, DeleteTodo } from './todo.actions';
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
     error: null,
     offset: 0,
     limit: 25,

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { PaginationQuery } from '@todo/shared/models';
+import { AppState } from '@todo/app-state.model';
 
 import { AddTodo, GetTodo } from './+state';
 import { TodoState, TodoQueryParams } from './models';
@@ -16,24 +17,24 @@ import { TodoState, TodoQueryParams } from './models';
 })
 export class TodoComponent implements OnInit, OnDestroy
 {
-    public todos: TodoState;
+    public state: TodoState;
 
     private _todoSub: Subscription;
 
     constructor(
-        private _store: Store<any>,
+        private _store: Store<AppState>,
         private _activatedRoute: ActivatedRoute
     ) { }
 
     public ngOnInit(): void
     {
         this._todoSub = this._store
-            .select((state) => state.todoFeature)
-            .subscribe(todo => this.todos = todo);
+            .select(store => store.todos)
+            .subscribe(state => this.state = state);
 
         this._activatedRoute.queryParams.subscribe((params: TodoQueryParams) =>
         {
-            this.getTodo({ offset: 0, limit: this.todos.limit, ...params });
+            this.getTodo({ ...params, offset: 0, limit: this.state.limit });
         });
     }
 
@@ -52,8 +53,8 @@ export class TodoComponent implements OnInit, OnDestroy
         this._store.dispatch(new GetTodo.Pending(filters));
     }
 
-    public addTodo(todo: any): void
+    public addTodo(value: string): void
     {
-        this._store.dispatch(new AddTodo.Pending(todo.value));
+        this._store.dispatch(new AddTodo.Pending(value));
     }
 }

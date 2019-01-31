@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'todo-filter',
@@ -12,8 +11,13 @@ export class TodoFilterComponent
         private _router: Router
     ) { }
 
-    public filter(form: NgForm): void
+    public search(value: string): void
     {
-        this._router.navigate([], { queryParams: { ...form.value } });
+        this.navigate({ search: value });
+    }
+
+    public navigate(filter: any): void
+    {
+        this._router.navigate([], { queryParams: filter });
     }
 }

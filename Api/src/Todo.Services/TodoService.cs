@@ -13,7 +13,7 @@ namespace Todo.Services
         private readonly ITodoStore _todoStore;
 
         private readonly IMapper _mapper;
-
+        
         public TodoService(ITodoStore todoStore, IMapper mapper)
         {
             _todoStore = todoStore ?? throw new ArgumentNullException(nameof(todoStore));

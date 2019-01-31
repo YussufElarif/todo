@@ -18,12 +18,34 @@
         >
 
         <button
+            *ngIf="edit"
             matSuffix
             mat-button
             color="primary"
             (click)="changeValue(todo.id, input.value)"
+            [disabled]="input.value == todo.value"
         >
-            <mat-icon>{{ edit ? 'check' : 'edit' }}</mat-icon>
+            <mat-icon>check</mat-icon>
+        </button>
+
+        <button
+            *ngIf="!edit"
+            matSuffix
+            mat-button
+            color="primary"
+            (click)="changeMode()"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+            *ngIf="edit"
+            matSuffix
+            mat-button
+            color="warn"
+            (click)="cancelChange(input)"
+        >
+            <mat-icon>cancel</mat-icon>
         </button>
 
         <button
