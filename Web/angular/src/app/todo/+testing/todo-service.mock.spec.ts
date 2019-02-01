@@ -1,23 +1,23 @@
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export class TodoServiceMock
 {
-    public getTodos()
+    public getTodos(): Observable<any>
     {
         return of();
     }
 
-    public addTodo()
+    public addTodo(): Observable<any>
     {
         return of();
     }
 
-    public updateTodo()
+    public updateTodo(): Observable<any>
     {
         return of();
     }
 
-    public deleteTodo()
+    public deleteTodo(): Observable<any>
     {
         return of();
     }
